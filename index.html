@@ -4,6 +4,7 @@
     <title>Task Manager 📝</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <div class="main">
@@ -91,32 +92,32 @@
           <div class="main__form__line">
             <div class="main__form__item">
               <label>Task Name</label>
-              <input required type="text" />
+              <input input="nameInput" required type="text" />
             </div>
           </div>
           <div class="main__form__line">
             <div class="main__form__item">
               <label>Task Owner</label>
-              <input required type="text" />
+              <input id="ownerInput" required type="text" />
             </div>
           </div>
           <div class="main__form__line">
             <div class="main__form__item">
               <label>Task Description</label>
-              <input required type="text" />
+              <input id="descriptionInput" required type="text" />
             </div>
           </div>
           <div class="main__form__line">
             <div class="main__form__item">
               <label>Task Image URL</label>
-              <input required type="text" />
+              <input id="imgUrlInput" required type="text" />
             </div>
           </div>
           <br />
         </div>
         <div class="main__form__buttons">
           <div class="main__form__line">
-            <button class="button-submit">Add Task</button>
+            <button class="submit-button">Add Task</button>
           </div>
         </div>
       </form>
