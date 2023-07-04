@@ -74,7 +74,7 @@ h2{
 }
 
 
-.button-submit {
+.submit-button {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -136,4 +136,10 @@ img {
 
 h3 {
   color:blueviolet;
+}
+
+@media (width <= 600) {
+  .main{
+    flex-wrap: nowrap;
+  }
 }

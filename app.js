@@ -39,3 +39,23 @@ let task = [
     imgUrl: "https://pbs.twimg.com/media/Ew2_PGEWgAE3V5-.jpg",
   },
 ];
+
+// 0 - Bajar repo, todos los ejercicios seran parte
+// del mismo proyecto js-dom-manipulation-essentials
+// Hacer una funcion que cree dinamicamente las task
+
+// 1 - Funcion
+// Mostrar en un mensaje de alerta los valores del form
+
+// 2 - Funcion
+// Agregar elemento en la lista al llenar el formulario
+
+// 3 - Funcion
+// Eliminar elemento en la lista al hacer click sobre el elemento
+
+// 4 - Funcion
+// Crear un boton para vaciar/eliminar todas las tareas
+
+// 5 - Funcion
+// Si ya no quedan tareas navegar programaticamente
+// a www.youtube.com
