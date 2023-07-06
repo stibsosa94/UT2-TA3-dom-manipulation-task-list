@@ -1,4 +1,4 @@
-let task = [
+let tasks = [
   {
     id: 0,
     owner: "Pelado Cáceres",
@@ -43,6 +43,33 @@ let task = [
 // 0 - Bajar repo, todos los ejercicios seran parte
 // del mismo proyecto js-dom-manipulation-essentials
 // Hacer una funcion que cree dinamicamente las task
+function createTaskComponent(task) {
+  const { id, owner, name, description, imgUrl } = task;
+  const taskListElement = document.getElementsByTagName("ul")[0];
+
+  const taskElement = `
+    <li id="${id}" class="task">
+      <img
+        src="${imgUrl}"
+      />
+      <div class="task-information">
+        <h3>Task Owner</h3>
+        <p>${owner}</p>
+        <h3>Task Name</h3>
+        <p>${name}</p>
+        <h3>Task Description</h3>
+        <p>${description}</p>
+      </div>
+  </li>`;
+
+  taskListElement.insertAdjacentHTML("beforeend", taskElement);
+}
+
+function loadTasks() {
+  tasks.forEach((e) => createTaskComponent(e));
+}
+
+loadTasks();
 
 // 1 - Funcion
 // Mostrar en un mensaje de alerta los valores del form
