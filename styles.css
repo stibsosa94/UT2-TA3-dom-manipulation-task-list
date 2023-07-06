@@ -41,6 +41,11 @@ h2{
   justify-content: flex-start;
 }
 
+.main__section__info{
+  display: flex;
+  justify-content: space-between;
+}
+
 .main__form{
   display: flex;
   flex-direction: column;
@@ -60,30 +65,31 @@ h2{
   flex-direction: column;
 }
 
-
-.message-text{
-  margin-top: 5%;
+.main__form__buttons{
   display: flex;
-  width: 40vw;
-  height: 10vh;
-}
-
-.message-input-container{
-  flex: 1;
-  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 
-.submit-button {
+button{
   display: flex;
   justify-content: center;
   text-align: center;
   color: white;
-  background-color: blueviolet;
   border-radius: 3px;
   border: solid black 3 px;
   flex: 1;
   padding: 2vw;
+  font-size: large;
+}
+
+.submit-button {
+  background-color: blueviolet;
+}
+
+.clear-button {
+  background-color: orange;
 }
 
 input{
@@ -116,7 +122,6 @@ input{
 }
 
 .task::selection{
-
   border-color: red;
   box-shadow: 1px 1px 1px red;
 }
