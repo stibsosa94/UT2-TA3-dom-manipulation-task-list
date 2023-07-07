@@ -40,6 +40,8 @@ let tasks = [
   },
 ];
 
+let currentIdNumber = tasks.length;
+
 // 0 - Bajar repo, todos los ejercicios seran parte
 // del mismo proyecto js-dom-manipulation-essentials
 // Hacer una funcion que cree dinamicamente las task
@@ -73,6 +75,53 @@ loadTasks();
 
 // 1 - Funcion
 // Mostrar en un mensaje de alerta los valores del form
+function addListeners() {
+  // PREVENT RELOAD
+  const formElem = document.getElementsByTagName("form")[0];
+  formElem.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+
+  // ADD TASK
+  const addTaskButtonElement =
+    document.getElementsByClassName("submit-button")[0];
+
+  addTaskButtonElement.addEventListener("click", addTaskHandler);
+
+  // REMOVE TASK
+
+  // CLEAR ALL
+}
+
+function addTaskHandler() {
+  const nameElem = document.getElementById("nameInput");
+  const ownerElem = document.getElementById("ownerInput");
+  const descriptionElem = document.getElementById("descriptionInput");
+  const imgUrlInputElem = document.getElementById("imgUrlInput");
+
+  const id = currentIdNumber++;
+  const name = nameElem.value;
+  const owner = ownerElem.value;
+  const description = descriptionElem.value;
+  const imgUrl = imgUrlInputElem.value;
+
+  const newTask = { id, name, owner, description, imgUrl };
+
+  if (name && owner && description && imgUrl) {
+    addTaskAlert(newTask);
+    createTaskComponent(newTask);
+  }
+}
+
+function addTaskAlert(task) {
+  console.log("task: ", task);
+  const { id, owner, name, description, imgUrl } = task;
+  window.alert(
+    `id:${id}, owner:${owner}, name:${name}, description:${description}, imgUrl:${imgUrl} `
+  );
+}
+
+addListeners();
 
 // 2 - Funcion
 // Agregar elemento en la lista al llenar el formulario
