@@ -50,18 +50,18 @@ function createTaskComponent(task) {
   const taskListElement = document.getElementsByTagName("ul")[0];
 
   const taskElement = `
-    <li id="${id}" class="task">
-      <img
-        src="${imgUrl}"
-      />
-      <div class="task-information">
-        <h3>Task Owner</h3>
-        <p>${owner}</p>
-        <h3>Task Name</h3>
-        <p>${name}</p>
-        <h3>Task Description</h3>
-        <p>${description}</p>
-      </div>
+  <li id="${id}" class="task">
+    <img
+      src="${imgUrl}"
+    />
+    <div class="task-information">
+      <h3>Task Owner</h3>
+      <p>${owner}</p>
+      <h3>Task Name</h3>
+      <p>${name}</p>
+      <h3>Task Description</h3>
+      <p>${description}</p>
+    </div>
   </li>`;
 
   taskListElement.insertAdjacentHTML("beforeend", taskElement);
@@ -76,62 +76,98 @@ loadTasks();
 // 1 - Funcion
 // Mostrar en un mensaje de alerta los valores del form
 function addListeners() {
-  // PREVENT RELOAD
-  const formElem = document.getElementsByTagName("form")[0];
-  formElem.addEventListener("submit", (event) => {
+  // PREVENT THE PAGE RELOAD
+  const formElement = document.getElementsByTagName("form")[0];
+  formElement.addEventListener("submit", (event) => {
     event.preventDefault();
   });
 
-  // ADD TASK
+  //  ADD TASK BUTTON
   const addTaskButtonElement =
     document.getElementsByClassName("submit-button")[0];
-
   addTaskButtonElement.addEventListener("click", addTaskHandler);
 
   // REMOVE TASK
-
-  // CLEAR ALL
-}
-
-function addTaskHandler() {
-  const nameElem = document.getElementById("nameInput");
-  const ownerElem = document.getElementById("ownerInput");
-  const descriptionElem = document.getElementById("descriptionInput");
-  const imgUrlInputElem = document.getElementById("imgUrlInput");
-
-  const id = currentIdNumber++;
-  const name = nameElem.value;
-  const owner = ownerElem.value;
-  const description = descriptionElem.value;
-  const imgUrl = imgUrlInputElem.value;
-
-  const newTask = { id, name, owner, description, imgUrl };
-
-  if (name && owner && description && imgUrl) {
-    addTaskAlert(newTask);
-    createTaskComponent(newTask);
-  }
-}
-
-function addTaskAlert(task) {
-  console.log("task: ", task);
-  const { id, owner, name, description, imgUrl } = task;
-  window.alert(
-    `id:${id}, owner:${owner}, name:${name}, description:${description}, imgUrl:${imgUrl} `
+  const taskElements = [...document.getElementsByTagName("li")];
+  taskElements.forEach((e) =>
+    e.addEventListener("click", () => deleteTaskHandler(e))
   );
+
+  // DELETE ALL BUTTON
+  const deleteAllTaskButtonElement =
+    document.getElementsByClassName("clear-button")[0];
+  deleteAllTaskButtonElement.addEventListener("click", deleteAllTaskHandler);
 }
 
 addListeners();
 
+function addTaskAlert(newTask) {
+  const { id, owner, name, description, imgUrl } = newTask;
+  window.alert(
+    `Submiting ID:${id} OWNER:${owner}, NAME:${name}, DESCRIPTION:${description}, URL${imgUrl}`
+  );
+}
+
 // 2 - Funcion
 // Agregar elemento en la lista al llenar el formulario
 
+function cleanForm(fields) {
+  fields.forEach((e) => (e.value = ""));
+}
+
+function addTaskHandler(event) {
+  const ownerElem = document.getElementById("ownerInput");
+  const nameElem = document.getElementById("nameInput");
+  const descriptionElem = document.getElementById("descriptionInput");
+  const imgUrlElem = document.getElementById("imgUrlInput");
+
+  const id = currentIdNumber++;
+  const owner = ownerElem.value;
+  const name = nameElem.value;
+  const description = descriptionElem.value;
+  const imgUrl = imgUrlElem.value;
+
+  if (id && owner && name && description && imgUrl) {
+    const newTask = { id, owner, name, description, imgUrl };
+    const formFields = [ownerElem, nameElem, descriptionElem, imgUrlElem];
+    addTaskAlert(newTask);
+    createTaskComponent(newTask);
+    cleanForm(formFields);
+
+    // FOR DELETE
+    addDeleteListener(id);
+  }
+}
+
 // 3 - Funcion
 // Eliminar elemento en la lista al hacer click sobre el elemento
+function deleteTaskHandler(taskElement) {
+  console.log(taskElement.id);
+  const id = taskElement.id;
+  const filteredTask = tasks.filter((e) => e.id !== +id);
+  tasks = filteredTask;
+  taskElement.remove();
+  console.log("tasks: ", tasks);
+}
+
+function addDeleteListener(id) {
+  const listElements = [...document.getElementsByTagName("li")];
+  const searchedElement = listElements.find((e) => e.id == id);
+  console.log("searchedElement", searchedElement);
+  searchedElement.addEventListener("click", () =>
+    deleteTaskHandler(searchedElement)
+  );
+}
 
 // 4 - Funcion
 // Crear un boton para vaciar/eliminar todas las tareas
+function deleteAllTaskHandler() {
+  const allTaskElements = [...document.getElementsByTagName("li")];
+  allTaskElements.forEach((e) => e.remove());
+  tasks = [];
+}
 
 // 5 - Funcion
 // Si ya no quedan tareas navegar programaticamente
 // a www.youtube.com
+function redirectWhenNoTask() {}
