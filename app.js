@@ -142,18 +142,16 @@ function addTaskHandler(event) {
 // 3 - Funcion
 // Eliminar elemento en la lista al hacer click sobre el elemento
 function deleteTaskHandler(taskElement) {
-  console.log(taskElement.id);
   const id = taskElement.id;
   const filteredTask = tasks.filter((e) => e.id !== +id);
   tasks = filteredTask;
   taskElement.remove();
-  console.log("tasks: ", tasks);
+  shouldRedirect();
 }
 
 function addDeleteListener(id) {
   const listElements = [...document.getElementsByTagName("li")];
   const searchedElement = listElements.find((e) => e.id == id);
-  console.log("searchedElement", searchedElement);
   searchedElement.addEventListener("click", () =>
     deleteTaskHandler(searchedElement)
   );
@@ -165,9 +163,18 @@ function deleteAllTaskHandler() {
   const allTaskElements = [...document.getElementsByTagName("li")];
   allTaskElements.forEach((e) => e.remove());
   tasks = [];
+  shouldRedirect();
 }
 
 // 5 - Funcion
 // Si ya no quedan tareas navegar programaticamente
 // a www.youtube.com
-function redirectWhenNoTask() {}
+function redirectWhenNoTask() {
+  window.location.href = "https://www.youtube.com/watch?v=SZXTJG-cUkU";
+}
+
+function shouldRedirect() {
+  if (!tasks.length) {
+    redirectWhenNoTask();
+  }
+}
