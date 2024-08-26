@@ -42,10 +42,45 @@ let tasks = [
 
 let currentIdNumber = tasks.length;
 
+const boton = document.getElementById('addTask');
+boton.addEventListener('click', (event)=> createTaskComponent(event));
+
 // 0 - Bajar repo, todos los ejercicios seran parte
 // del mismo proyecto js-dom-manipulation-essentials
 // Hacer una funcion que cree dinamicamente las task
-function createTaskComponent(task) {}
+function createTaskComponent(event) {
+
+   console.log("event",event);
+
+   event.preventDefault()
+
+
+    const newName = document.createElement("li");
+    const newOwner = document.createElement("li");
+    const newDescription = document.createElement("li");
+    const newImage = document.createElement("img");
+    let nameInput = document.getElementById('nameInput').value;
+    let ownerInput = document.getElementById('ownerInput').value;
+    let descriptionInput = document.getElementById('descriptionInput').value;
+    let imgUrlInput = document.getElementById('imgUrlInput').value;
+    newName.textContent = nameInput;
+    newOwner.textContent = ownerInput;
+    newDescription.textContent = descriptionInput;
+    newImage.src=imgUrlInput;
+    
+    const tareas = document.createElement('div');
+    let nuevaLista = document.getElementById('list');
+    tareas.appendChild(newName);
+    tareas.appendChild(newOwner);
+    tareas.appendChild(newDescription);
+    tareas.appendChild(newImage);
+
+    nuevaLista.appendChild(tareas);
+    console.log(tareas);
+
+}
+
+
 
 function loadTasks() {}
 
